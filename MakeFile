@@ -1,0 +1,9 @@
+Test = Test.py
+window = Window.py
+Binary = PolygonEditor
+src = src/
+
+#probando Make
+
+Run:
+	python $(src)$(window)
