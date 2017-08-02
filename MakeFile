@@ -6,4 +6,4 @@ src = src/
 #probando Make
 
 Run:
-	python $(src)$(window) $(src)image.png
+	python $(src)$(window)
