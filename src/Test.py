@@ -1,3 +1,4 @@
 import sys
 
-print ('Hola Mundo')
+def say(algo):
+    print (algo)

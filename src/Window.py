@@ -1,54 +1,48 @@
 import sys
 from PyQt5 import QtWidgets, QtGui
 
+import Test
+
 from PyQt5.QtWidgets import QWidget, QMainWindow, QAction
 
-var = 'Esto es una prueba para probrar los labels'
 name = 'PolygonEditor'
 
-#Tool Bar class
-class MenuBar(QWidget):
-    """ MenuBar."""
+class MainWindow(QMainWindow):
+
     def __init__(self):
-        super(MenuBar, self).__init__()
+        super(MainWindow, self).__init__()
+
+
+        self.setWindowTitle(name)
+        self.setGeometry(100,100,750,450)
+
+        self.createActions()
+        self.createMenus()
+
+    def createActions(self):
+
+        self.openAct = QAction('Open',self)
+        self.saveAct = QAction('Save',self)
+        self.saveAsAct = QAction('Save As',self)
+        self.quitAct = QAction('Quit',self)
+
+        self.RedoAct = QAction('Redo',self)
+        self.UndoAct = QAction('Redo',self)
+
+    def createMenus(self):
+        self.fileMenu = self.menuBar().addMenu('File')
+        self.fileMenu.addAction(self.openAct)
+        self.fileMenu.addAction(self.saveAct)
+        self.fileMenu.addAction(self.saveAsAct)
+        self.fileMenu.addAction(self.quitAct)
+
+        self.editMenu = self.menuBar().addMenu('Edit')
+        self.editMenu.addAction(self.RedoAct)
+        self.editMenu.addAction(self.UndoAct)
         pass
 
 
-
-#Creating Window
-def window():
-    app = QtWidgets.QApplication(sys.argv)
-    w = QMainWindow()
-
-    w.setWindowTitle(name)
-    w.setGeometry(100,100,750,450)
-
-    label1 = QtWidgets.QLabel(w)
-    label2 = QtWidgets.QLabel(w)
-
-    label1.setText(var)
-
-    image = QtGui.QPixmap('image.png')
-    label2.setPixmap(image)
-
-    label1.move(10,10)
-    label2.move(50,70)
-
-    bar = w.menuBar()
-    file = bar.addMenu ('File')
-
-    any_action = QAction('Any', w)
-    file.addAction(any_action)
-
-    file.triggered.connect(respond)
-
-    w.show()
-    sys.exit(app.exec_())
-
-def respond(q):
-    signal = q.text()
-    if signal == 'Any':
-        print ('Hola')
-    pass
-
-window()
+app = QtWidgets.QApplication(sys.argv)
+mainWindow = MainWindow()
+mainWindow.show()
+sys.exit(app.exec_())
